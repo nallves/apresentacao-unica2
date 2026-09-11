@@ -77,3 +77,54 @@
     @media (prefers-reduced-motion:reduce){#deck .slide[data-index="8"] .legal-heading,#deck .slide[data-index="8"] .legal-service,#deck .slide[data-index="8"] .legal-support{animation:none!important;opacity:1;transform:none}}
     html.reduced-motion #deck .slide[data-index="8"] .legal-heading,html.reduced-motion #deck .slide[data-index="8"] .legal-service,html.reduced-motion #deck .slide[data-index="8"] .legal-support{animation:none!important;opacity:1;transform:none}
    .slide2-title .slide2-final-lines{font-size:calc(1em - 9px)}
+@media (max-width: 768px) {
+  #deck .slide[data-index="2"] .slide-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding: 24px !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* .slide2-gallery é o filho direto do flex container (.slide-inner) e
+     estava absoluto cobrindo o slide inteiro — por isso sobrepunha o
+     .slide2-left-stage. Precisa virar um item de fluxo normal. */
+  #deck .slide[data-index="2"] .slide2-gallery {
+    position: relative !important;
+    inset: auto !important;
+    z-index: auto !important;
+    order: 2 !important;
+    width: 100% !important;
+  }
+
+  #deck .slide[data-index="2"] .slide2-left-stage {
+    position: relative !important;
+    order: 1 !important;
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  #deck .slide[data-index="2"] .slide2-left-stage > .lang-block {
+    width: 100% !important;
+  }
+
+  #deck .slide[data-index="2"] .slide2-language {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    margin-top: 40px !important;
+    padding: 0 !important;
+  }
+
+  #deck .slide[data-index="2"] .slide2-frame-copy {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+}
