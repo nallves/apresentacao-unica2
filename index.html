@@ -8,14 +8,33 @@
 </head>
 <link rel="Stylesheet" href="style.css">
 <body>
-  <div id="rotate-hint" role="alert" aria-live="polite">
+  <div id="rotate-hint" role="status" aria-live="polite">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/>
       <line x1="9" y1="19" x2="15" y2="19" stroke="currentColor" stroke-width="1.6"/>
     </svg>
-    <p data-lang="pt">Gire seu aparelho para a horizontal para ver a apresentação.</p>
-    <p data-lang="en" hidden>Rotate your device to landscape to view the presentation.</p>
+    <p data-lang="pt">Dica: na horizontal a apresentação fica melhor.</p>
+    <p data-lang="en" hidden>Tip: landscape gives you the best view.</p>
+    <button type="button" id="rotate-hint-close" aria-label="Fechar aviso">&times;</button>
   </div>
+  <script>
+    (function(){
+      var hint = document.getElementById('rotate-hint');
+      var closeBtn = document.getElementById('rotate-hint-close');
+      if(!hint || !closeBtn) return;
+      var dismissed = false;
+      function update(){
+        if(!dismissed) hint.classList.add('is-visible');
+      }
+      closeBtn.addEventListener('click', function(){
+        dismissed = true;
+        hint.classList.remove('is-visible');
+      });
+      window.addEventListener('resize', update);
+      window.addEventListener('orientationchange', update);
+      update();
+    })();
+  </script>
   <!-- Logo oficial: substitua cada .logo-slot pelo arquivo oficial quando ele for anexado. Nenhuma marca textual ou SVG foi recriada. -->
   <svg aria-hidden="true" style="display:none"><symbol id="icon-prev" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="icon-next" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="icon-expand" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M9 20H4v-5m11 5h5v-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="icon-compress" viewBox="0 0 24 24"><path d="M4 9h5V4m6 0v5h5M4 15h5v5m6 0v-5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
   <p id="live" class="sr-only" aria-live="polite"></p>

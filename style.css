@@ -160,53 +160,53 @@
     object-fit: contain;
 }
   }
-
-
-
-
-
-/* ===================================================================
-   Ajustes para apresentação em CELULAR NA HORIZONTAL (landscape)
-   Adicionado para: apresentação priorizando visualização em modo
-   paisagem (celular deitado) em vez do modo retrato.
-   =================================================================== */
-
-/* Aviso de "gire o aparelho" — aparece apenas em celulares/tablets
-   pequenos quando estao em RETRATO (o app foi pensado p/ horizontal) */
 #rotate-hint{
   display:none;
   position:fixed;
-  inset:0;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
   z-index:99999;
-  background:var(--bg);
+  max-width:calc(100% - 32px);
+  background:var(--bg-deep);
   color:var(--ink);
-  flex-direction:column;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
   align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:32px;
+  gap:12px;
+  padding:12px 14px;
   font-family:var(--font);
 }
 #rotate-hint svg{
-  width:56px;height:56px;margin-bottom:18px;
+  flex:none;
+  width:26px;height:26px;
   animation:rotate-hint-spin 1.6s ease-in-out infinite;
 }
 #rotate-hint p{
-  max-width:280px;font-size:15px;line-height:1.5;color:var(--muted);
+  margin:0;
+  font-size:13px;
+  line-height:1.4;
+  color:var(--muted);
 }
+#rotate-hint button{
+  flex:none;
+  appearance:none;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1;
+  padding:4px 6px;
+  cursor:pointer;
+}
+#rotate-hint button:hover{color:var(--ink)}
 @keyframes rotate-hint-spin{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-90deg)}}
 
 @media (max-width:900px) and (orientation:portrait){
-  #rotate-hint{display:flex}
-  #deck{display:none}
+  #rotate-hint.is-visible{display:flex}
 }
 
-
-
-/* Recupera espaço vertical do rodapé quando o celular está na horizontal
-   e a tela é baixa -- o conteúdo dos slides passa a rolar (ver blocos
-   acima que agora também disparam em landscape curto), então o rodapé
-   não precisa reservar tanto espaço fixo. */
 @media (orientation:landscape) and (max-height:560px){
   :root{ --footer-h: clamp(34px, 8vh, 46px); }
 }
